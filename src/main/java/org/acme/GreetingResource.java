@@ -13,48 +13,45 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hello RESTEasy";}
+        return "Hello RESTEasy";
+    }
 
-        @GET
-        @Path("/personalized/{name}")
-        @Produces(MediaType.TEXT_PLAIN)
-        public String personalizedHello(@PathParam("name") String name) {
-            return "Hello " + name + "!";
-        }
+    @GET
+    @Path("/personalized/{name}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String personalizedHello(@PathParam("name") String name) {
+        return "Hello " + name + "!";
+    }
 
-        @POST
+    @POST
     @Path("/personalized")
     @Produces(MediaType.TEXT_PLAIN)
     public String personalizedHelloPost(Person p) {
-        return "Hello " + p.getFirst() + " " + p.getLast();
+        return "Hello " + p.getFirstName() + " " + p.getLastName();
     }
 
     public static class Person {
-        private String first;
-        private String last;
+        private String firstName;
+        private String lastName;
 
-    
-        public String getFirst() {
-            return first;
+        // Getter and Setter for firstName
+        public String getFirstName() {
+            return firstName;
         }
 
-       
-        public void setFirst(String first) {
-            this.first = first;
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
         }
 
-       
-        public String getLast() {
-            return last;
+        // Getter and Setter for lastName
+        public String getLastName() {
+            return lastName;
         }
 
-       
-        public void setLast(String last) {
-            this.last = last;
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
         }
-    
+    }
+}
 
-
-
-    }}
 
