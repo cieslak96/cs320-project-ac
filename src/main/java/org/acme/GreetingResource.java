@@ -1,5 +1,6 @@
 package org.acme;
 
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -30,6 +31,19 @@ public class GreetingResource {
         return "Hello " + p.getFirstName() + " " + p.getLastName();
     }
 
+    @POST
+    @Path("/personalized/{name}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    public String personalizedHelloSave(@PathParam("name") String name) {
+        // Create and persist a new UserName entity
+        UserName userName = new UserName(name);
+        userName.persist();
+
+        // Return a success message
+        return "Hello " + name + "! Your name has been stored in the database.";
+    }
+
     public static class Person {
         private String firstName;
         private String lastName;
@@ -53,5 +67,4 @@ public class GreetingResource {
         }
     }
 }
-
 
