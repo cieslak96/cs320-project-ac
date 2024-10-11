@@ -1,12 +1,12 @@
 package org.acme;
 
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
+
+import java.util.List;
 
 @Path("/hello")
 public class GreetingResource {
@@ -17,54 +17,83 @@ public class GreetingResource {
         return "Hello RESTEasy";
     }
 
-    @GET
-    @Path("/personalized/{name}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String personalizedHello(@PathParam("name") String name) {
-        return "Hello " + name + "!";
-    }
-
-    @POST
-    @Path("/personalized")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String personalizedHelloPost(Person p) {
-        return "Hello " + p.getFirstName() + " " + p.getLastName();
-    }
-
+    // Create operation (already implemented)
     @POST
     @Path("/personalized/{name}")
     @Produces(MediaType.TEXT_PLAIN)
     @Transactional
-    public String personalizedHelloSave(@PathParam("name") String name) {
+    public Response personalizedHelloSave(@PathParam String name) {
+        if (name == null || name.isBlank()) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Name cannot be blank").build();
+        }
+
+        // Check if the name already exists (optional feature)
+        if (UserName.find("name", name).firstResult() != null) {
+            return Response.status(Response.Status.CONFLICT).entity("Name already exists").build();
+        }
+
         // Create and persist a new UserName entity
         UserName userName = new UserName(name);
         userName.persist();
 
         // Return a success message
-        return "Hello " + name + "! Your name has been stored in the database.";
+        return Response.ok("Hello " + name + "! Your name has been stored in the database.").build();
     }
 
-    public static class Person {
-        private String firstName;
-        private String lastName;
+    // Read operation: Get all usernames
+    @GET
+    @Path("/users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserName> getAllUsers() {
+        return UserName.listAll();
+    }
 
-        // Getter and Setter for firstName
-        public String getFirstName() {
-            return firstName;
+    // Read operation: Get a username by ID
+    @GET
+    @Path("/users/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserById(@PathParam Long id) {
+        UserName user = UserName.findById(id);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
+        }
+        return Response.ok(user).build();
+    }
+
+    // Update operation: Update an existing username
+    @PATCH
+    @Path("/users/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    public Response updateUser(@PathParam Long id, @QueryParam("name") String newName) {
+        if (newName == null || newName.isBlank()) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("New name cannot be blank").build();
         }
 
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
+        UserName user = UserName.findById(id);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
         }
 
-        // Getter and Setter for lastName
-        public String getLastName() {
-            return lastName;
+        user.name = newName;
+        user.persist();
+
+        return Response.ok("User ID " + id + " updated to " + newName).build();
+    }
+
+    // Delete operation: Delete a username by ID
+    @DELETE
+    @Path("/users/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    public Response deleteUser(@PathParam Long id) {
+        UserName user = UserName.findById(id);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
         }
 
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
+        String name = user.name; // Store the name before deleting the user
+        user.delete();
+        return Response.ok("User ID " + id + " (" + name + ") deleted !").build();
     }
 }
-

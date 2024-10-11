@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
+import {useNavigate} from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+const navigateToAbout = () => {
+    navigate('/About');
+}
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [message, setMessage] = useState('');
@@ -20,7 +26,9 @@ function App() {
   };
 
   return (
+    
     <div className="app-container">
+     
       <h1>Personalized Greeting</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -38,6 +46,9 @@ function App() {
         <button type="submit">Submit</button>
       </form>
       <p>{message}</p>
+      <div>
+        <button onClick={navigateToAbout}>About</button>
+      </div>
     </div>
   );
 }

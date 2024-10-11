@@ -26,6 +26,9 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+   
+      
+           
         </dependencies>
     </dependencyManagement>
 
@@ -69,6 +72,8 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-mysql</artifactId>
 </dependency>
+
+
     </dependencies>
 
     <build>
