@@ -17,7 +17,17 @@ public class GreetingResource {
         return "Hello RESTEasy";
     }
 
-    // Create operation (already implemented)
+    @POST
+@Path("/personalized")
+@Produces(MediaType.TEXT_PLAIN)
+@Consumes(MediaType.APPLICATION_JSON)
+public String personalizedHelloPost(Person p) {
+    if (p.getFirstName() == null || p.getFirstName().isBlank() ||
+        p.getLastName() == null || p.getLastName().isBlank()) {
+        throw new WebApplicationException("First and Last names cannot be blank", Response.Status.BAD_REQUEST);
+    }
+    return "Hello " + p.getFirstName() + " " + p.getLastName();
+}
     @POST
     @Path("/personalized/{name}")
     @Produces(MediaType.TEXT_PLAIN)
