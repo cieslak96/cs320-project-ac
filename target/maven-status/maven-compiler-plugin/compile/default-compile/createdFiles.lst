@@ -1,0 +1,4 @@
+org/acme/UserName.class
+org/acme/GreetingResource.class
+org/acme/FrontendForwardingResource.class
+org/acme/Person.class
