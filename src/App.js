@@ -1,56 +1,104 @@
-import React, { useState } from 'react';
-import './App.css';
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./Navbar";
+import HomePage from "./HomePage";
+import ProfilePage from "./ProfilePage";
+import ReelPage from "./ReelPage";
+import { Authenticator } from "@aws-amplify/ui-react";
+import { Amplify } from "aws-amplify";
+import awsExports from "./aws-exports";
+import Introduction from "./Introduction";
+import '@aws-amplify/ui-react/styles.css';
 
-function App() {
-  const navigate = useNavigate();
-const navigateToAbout = () => {
-    navigate('/About');
-}
+// Ensure AWS Amplify is configured
+Amplify.configure(awsExports);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [message, setMessage] = useState('');
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await fetch('/hello/personalized', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ firstName, lastName }),
-    });
-    const text = await response.text();
-    setMessage(text);
+  const handleProfileImageChange = (imageUrl) => {
+    setProfileImageUrl(imageUrl); // Update the profile image URL
   };
 
   return (
-    
-    <div className="app-container">
-     
-      <h1>Personalized Greeting</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      <p>{message}</p>
-      <div>
-        <button onClick={navigateToAbout}>About</button>
-      </div>
+    <div>
+      {!isAuthenticated && <Introduction />}
+      <Authenticator
+        formFields={{
+          signUp: {
+          
+          
+            name: {
+              placeholder: "Name",
+              label: "Name", // Email is required
+              required: true,
+              order:1
+            },
+            username: {
+              placeholder: "Username",
+              label: "Username", // Email is required
+              required: true,
+              order:2
+            },
+            email: {
+              placeholder: "Email",
+              label: "Email", // Email is required
+              required: true,
+              order:3
+            },
+            phone_number: {
+              placeholder: "Phone Number (optional)",
+              label: "Phone Number", // Optional phone number
+              required: false,
+            },
+          },
+        }}
+      >
+        {({ signOut, user }) => {
+          if (user && !isAuthenticated) {
+            setIsAuthenticated(true);
+          }
+
+          const handleSignOut = () => {
+            signOut();
+            setIsAuthenticated(false);
+            window.location.reload();
+          };
+
+          return (
+            <>
+              {user ? (
+                <>
+                  <Navbar
+                    isAuthenticated={!!user}
+                    signOut={handleSignOut}
+                    profileImageUrl={profileImageUrl}
+                  />
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route
+                      path="/profile"
+                      element={<ProfilePage user={user} onProfileImageChange={handleProfileImageChange} />}
+                    />
+                    <Route path="/reel" element={<ReelPage />} />
+                  </Routes>
+                  <button onClick={handleSignOut}>Sign Out</button>
+                </>
+              ) : (
+                <>
+                  {!isAuthenticated && <Introduction />}
+                  <div className="auth-container">
+                    <Authenticator />
+                  </div>
+                </>
+              )}
+            </>
+          );
+        }}
+      </Authenticator>
     </div>
   );
-}
+};
 
 export default App;

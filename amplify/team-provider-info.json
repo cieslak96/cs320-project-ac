@@ -1,0 +1,31 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mural-dev-7b3f7-authRole",
+      "UnauthRoleArn": "arn:aws:iam::730335528058:role/amplify-mural-dev-7b3f7-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::730335528058:role/amplify-mural-dev-7b3f7-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-mural-dev-7b3f7-deployment",
+      "UnauthRoleName": "amplify-mural-dev-7b3f7-unauthRole",
+      "StackName": "amplify-mural-dev-7b3f7",
+      "StackId": "arn:aws:cloudformation:us-west-1:730335528058:stack/amplify-mural-dev-7b3f7/a590ced0-8eaa-11ef-b061-06113c369a07",
+      "AmplifyAppId": "dgrfaqlyhjz2j"
+    },
+    "categories": {
+      "auth": {
+        "mural91a51ed3": {
+          "userPoolId": "us-west-1_g59dL1RpX",
+          "userPoolName": "Mural",
+          "webClientId": "2rh9hhdu9ga66g6scs2us436i6",
+          "nativeClientId": "2rh9hhdu9ga66g6scs2us436i6"
+        }
+      },
+      "storage": {
+        "murala2e06855": {
+          "bucketName": "muralbucket",
+          "region": "us-west-1"
+        }
+      }
+    }
+  }
+}
