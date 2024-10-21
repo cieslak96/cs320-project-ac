@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import HomePage from "./HomePage";
@@ -7,8 +7,8 @@ import ReelPage from "./ReelPage";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
-import Introduction from "./Introduction";
 import '@aws-amplify/ui-react/styles.css';
+import { getUrl } from 'aws-amplify/storage';
 
 // Ensure AWS Amplify is configured
 Amplify.configure(awsExports);
@@ -16,78 +16,111 @@ Amplify.configure(awsExports);
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [user, setUser] = useState(null); // Track user state separately
+
+  // Fetch profile image when the user logs in
+  const fetchProfileImage = async (username) => {
+    try {
+      const linkToStorageFile = await getUrl({
+        path: `profile-pictures/${username}`,
+        options: { validateObjectExistence: true, expiresIn: 900 }
+      });
+      setProfileImageUrl(linkToStorageFile.url);
+      localStorage.setItem('profileImageUrl', linkToStorageFile.url);
+    } catch (error) {
+      console.log("No profile picture found for the user, setting default image.");
+      const defaultLinkToStorageFile = await getUrl({
+        path: 'default-pictures/user.PNG', // Set the path to your default image here
+        options: { validateObjectExistence: true, expiresIn: 900 }
+      });
+      setProfileImageUrl(defaultLinkToStorageFile.url);
+      localStorage.setItem('profileImageUrl', defaultLinkToStorageFile.url);
+    }
+  };
+
+  // Set user and authenticated state when the user logs in
+  useEffect(() => {
+    if (user && !isAuthenticated) {
+      setIsAuthenticated(true);
+      fetchProfileImage(user.username); // Fetch profile image after login
+    }
+  }, [user, isAuthenticated]);
 
   const handleProfileImageChange = (imageUrl) => {
-    setProfileImageUrl(imageUrl); // Update the profile image URL
+    setProfileImageUrl(imageUrl);
+    localStorage.setItem('profileImageUrl', imageUrl); // Save image URL to localStorage
+  };
+
+  const handleSignOut = (signOut) => {
+    signOut();
+    setIsAuthenticated(false);
+    localStorage.removeItem('profileImageUrl'); // Clear image URL from localStorage on sign-out
+    window.location.reload();
   };
 
   return (
     <div>
-      {!isAuthenticated && <Introduction />}
       <Authenticator
         formFields={{
           signUp: {
-          
-          
             name: {
               placeholder: "Name",
-              label: "Name", // Email is required
+              label: "Name",
               required: true,
-              order:1
+              order: 1,
             },
             username: {
               placeholder: "Username",
-              label: "Username", // Email is required
+              label: "Username",
               required: true,
-              order:2
+              order: 2,
             },
             email: {
               placeholder: "Email",
-              label: "Email", // Email is required
+              label: "Email",
               required: true,
-              order:3
+              order: 3,
             },
             phone_number: {
               placeholder: "Phone Number (optional)",
-              label: "Phone Number", // Optional phone number
+              label: "Phone Number",
               required: false,
             },
           },
         }}
       >
-        {({ signOut, user }) => {
-          if (user && !isAuthenticated) {
-            setIsAuthenticated(true);
+        {({ signOut, user: currentUser }) => {
+          // Set the user state when the user logs in
+          if (currentUser && !user) {
+            setUser(currentUser);
           }
-
-          const handleSignOut = () => {
-            signOut();
-            setIsAuthenticated(false);
-            window.location.reload();
-          };
 
           return (
             <>
-              {user ? (
+              {currentUser ? (
                 <>
                   <Navbar
-                    isAuthenticated={!!user}
-                    signOut={handleSignOut}
+                    isAuthenticated={!!currentUser}
+                    signOut={() => handleSignOut(signOut)}
                     profileImageUrl={profileImageUrl}
                   />
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route
                       path="/profile"
-                      element={<ProfilePage user={user} onProfileImageChange={handleProfileImageChange} />}
+                      element={
+                        <ProfilePage
+                          user={currentUser}
+                          onProfileImageChange={handleProfileImageChange}
+                        />
+                      }
                     />
                     <Route path="/reel" element={<ReelPage />} />
                   </Routes>
-                  <button onClick={handleSignOut}>Sign Out</button>
+                  <button onClick={() => handleSignOut(signOut)}>Sign Out</button>
                 </>
               ) : (
                 <>
-                  {!isAuthenticated && <Introduction />}
                   <div className="auth-container">
                     <Authenticator />
                   </div>

@@ -1,6 +1,6 @@
 {
   "auth": {
-    "mural91a51ed3": {
+    "mural72b87f83": {
       "customAuth": false,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -9,35 +9,91 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_mural91a51ed3_nativeClientId": {
+    "AMPLIFY_auth_mural72b87f83_allowUnauthenticatedIdentities": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "mural91a51ed3"
+          "resourceName": "mural72b87f83"
         }
       ]
     },
-    "AMPLIFY_auth_mural91a51ed3_userPoolId": {
+    "AMPLIFY_auth_mural72b87f83_authRoleArn": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "mural91a51ed3"
+          "resourceName": "mural72b87f83"
         }
       ]
     },
-    "AMPLIFY_auth_mural91a51ed3_userPoolName": {
+    "AMPLIFY_auth_mural72b87f83_authRoleName": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "mural91a51ed3"
+          "resourceName": "mural72b87f83"
         }
       ]
     },
-    "AMPLIFY_auth_mural91a51ed3_webClientId": {
+    "AMPLIFY_auth_mural72b87f83_identityPoolId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "mural91a51ed3"
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_identityPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_unauthRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_unauthRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
+        }
+      ]
+    },
+    "AMPLIFY_auth_mural72b87f83_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mural72b87f83"
         }
       ]
     },

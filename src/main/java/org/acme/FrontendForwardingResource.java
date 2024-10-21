@@ -5,29 +5,36 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.nio.file.Files;  // Correct import for file operations
-import java.io.IOException;
+import java.io.InputStream;
 
-@Path("/{path:.*}") // Catch-all path
+@Path("/{path:.*}") // Catch-all path for React routes
 public class FrontendForwardingResource {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
     public Response serveFrontend() {
         try {
-            // Fully qualify java.nio.file.Path here to avoid the conflict with jakarta.ws.rs.Path
-            java.nio.file.Path filePath = java.nio.file.Paths.get("src/main/resources/META-INF/resources/index.html");
-            
-            // Read the file content as a String
-            String content = Files.readString(filePath);
-            
-            // Return the content as the response body
+            // Load index.html from classpath
+            InputStream inputStream = getClass().getResourceAsStream("/META-INF/resources/index.html");
+
+            if (inputStream == null) {
+                // Return 404 if index.html is not found
+                return Response.status(Response.Status.NOT_FOUND)
+                               .entity("File not found: index.html")
+                               .build();
+            }
+
+            // Read the content of index.html
+            String content = new String(inputStream.readAllBytes());
+
+            // Return the content of index.html as response
             return Response.ok(content).build();
-        } catch (IOException e) {
-            // Handle the case where the file is not found or can't be read
-            return Response.status(Response.Status.NOT_FOUND)
-                           .entity("File not found: " + e.getMessage())
+        } catch (Exception e) {
+            // Handle errors such as file not being found
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                           .entity("Error: " + e.getMessage())
                            .build();
         }
     }
 }
+

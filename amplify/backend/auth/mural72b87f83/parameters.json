@@ -1,6 +1,6 @@
 {
-  "authSelections": "userPoolOnly",
-  "resourceName": "mural91a51ed3",
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "mural72b87f83",
   "serviceType": "imported",
   "region": "us-west-1",
   "aliasAttributes": [

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './Navbar.css';
-import axios from 'axios';
 
 const Navbar = ({ isAuthenticated, signOut, profileImageUrl }) => {
-  const [profileImage, setProfileImage] = useState(profileImageUrl || "https://via.placeholder.com/40");
+  const [profileImage, setProfileImage] = useState(
+    profileImageUrl || "https://via.placeholder.com/40"
+  );
 
+  // Update profile image when the user logs in or profile image changes
   useEffect(() => {
     if (isAuthenticated && profileImageUrl) {
       setProfileImage(profileImageUrl);
+    } else {
+      setProfileImage("https://via.placeholder.com/40"); // Placeholder image if no profile image
     }
   }, [isAuthenticated, profileImageUrl]);
 
@@ -46,8 +50,4 @@ const Navbar = ({ isAuthenticated, signOut, profileImageUrl }) => {
 };
 
 export default Navbar;
-
-
-
-
 
