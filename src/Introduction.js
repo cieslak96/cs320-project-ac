@@ -1,5 +1,6 @@
 import React from 'react';
 import '@aws-amplify/ui-react/styles.css';
+import "./styles.css";
 
 
 const Introduction = () => {

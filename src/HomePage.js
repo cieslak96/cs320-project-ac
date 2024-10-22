@@ -1,7 +1,7 @@
 
 import '@aws-amplify/ui-react/styles.css'; // Import Amplify UI styles
 
-import './HomePage.css'; // Import CSS for styling
+import './styles.css'; // Import CSS for styling
 
 const HomePage = () => {
   return (

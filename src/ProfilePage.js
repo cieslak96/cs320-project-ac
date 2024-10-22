@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getUrl, uploadData, remove } from 'aws-amplify/storage';
 import { Button, Flex, Heading, Image, TextField, View } from '@aws-amplify/ui-react';
-import { StorageImage } from '@aws-amplify/ui-react-storage'; // New import for StorageImage
 import '@aws-amplify/ui-react/styles.css';
+import "./styles.css";
 
 const ProfilePage = ({ user, onProfileImageChange }) => {
   const [profilePic, setProfilePic] = useState(null);

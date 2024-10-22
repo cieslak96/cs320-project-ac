@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import './ReelPage.css'; // Import the CSS file for styling
+import './styles.css'; // Import the CSS file for styling
+import "./Introduction";
+import Introduction from "./Introduction";
+
 
 const ReelPage = () => {
   const [videos, setVideos] = useState([]);
@@ -13,7 +16,7 @@ const ReelPage = () => {
   };
 
   return (
-    <div className="reel-page">
+    <><Introduction></Introduction><div className="reel-page">
       <h2>Reel</h2>
       <p>Upload and view your video reels here.</p>
 
@@ -38,7 +41,7 @@ const ReelPage = () => {
           <p>No videos uploaded yet. Upload a video to get started!</p>
         )}
       </div>
-    </div>
+    </div></>
   );
 };
 

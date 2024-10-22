@@ -1,0 +1,189 @@
+/* General Page Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #A3D1D1; /* Light teal background */
+    color: #333; /* Dark text for readability */
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+
+
+  /* General Button Styles */
+  button {
+    background-color: #F2B84B; /* Yellow-orange background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #42aaaa; /* Darker yellow-orange */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  /* Homepage Styles */
+  .home-page {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    max-width: 900px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-page h1 {
+    color: #3AA6A6; /* Teal */
+    margin-bottom: 20px;
+  }
+  
+  .home-page p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Features Section */
+  .features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+  }
+  
+  .feature {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    width: 22%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature h2 {
+    color: #336D72; /* Dark teal */
+    margin-bottom: 10px;
+  }
+  
+  .feature p {
+    color: #555;
+  }
+  
+  /* Profile Page */
+  .profile-page {
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-page h2 {
+    color: #3AA6A6; /* Teal */
+    margin-bottom: 20px;
+  }
+  
+  .profile-page p {
+    color: #555;
+  }
+  
+  /* Reel Page */
+  .reel-page {
+    background-color: #f9de87fd;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reel-page h2 {
+    color: #3AA6A6; /* Teal */
+    margin-bottom: 20px;
+  }
+  
+  .reel-page .upload-section {
+    background-color: wheat;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reel-page .upload-section button {
+    background-color: #3AA6A6; /* Teal */
+  }
+  
+  .reel-page .upload-section button:hover {
+    background-color: #2f8585; /* Darker teal */
+  }
+  
+  .reel-page .video-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 40px;
+  }
+  
+  .reel-page .video-card {
+    background-color: rgb(255, 233, 147);
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  }
+  .reel-page .video-gallery {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .reel-page .video-card {
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .reel-page .video-card video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .reel-page .video-card h4 {
+    color: #F2B84B;
+    text-align: center;
+    padding: 10px;
+  }
+  /* Introduction Page Styles */
+.introduction {
+    text-align: center;
+    background-color: white; /* Teal background */
+   
+    padding: 60px 20px;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .introduction h1 {
+    font-size: 2.5rem;
+    color: #3AA6A6; /* Yellow-orange for emphasis */
+    margin-bottom: 20px;
+  }
+  
+  .introduction p {
+    font-size: 1.2rem;
+    color: #F2B84B;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+  
