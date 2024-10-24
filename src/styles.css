@@ -7,12 +7,15 @@ body {
     padding: 0;
   }
   
-  
+  .page-container {
+    padding: 40px; /* Specific padding for the page content */
+    box-sizing: border-box;
+  }
 
 
   /* General Button Styles */
   button {
-    background-color: #F2B84B; /* Yellow-orange background */
+    background-color: #3AA6A6; /* Yellow-orange background */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -187,3 +190,112 @@ body {
     line-height: 1.6;
   }
   
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    object-fit: cover;
+  }
+  
+  /* Enlarge profile picture on hover */
+  .profile-picture:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Button styles when options are visible */
+  .profile-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .profile-options button {
+    margin-top: 0.5rem;
+  }
+  
+  /* Hide options by default */
+  .profile-options.hidden {
+    display: none;
+  }
+
+  .cover-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+  
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -75px;
+  }
+  .button-container {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+  }
+  
+  .small-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .profile-dropdown {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #3AA6A6;
+   
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    width: 165px;
+    z-index: 1000;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    background-color: #3AA6A6;;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+   background-color: rgba(135, 255, 229, 0.1);
+    transform: scale(1.1);
+  }
+  
+  .profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .profile-picture-navbar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .navbar-logo {
+    width: 40px;
+    height: 40px;
+  }

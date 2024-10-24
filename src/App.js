@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import HomePage from "./HomePage";
 import ProfilePage from "./ProfilePage";
 import ReelPage from "./ReelPage";
+import ManageAccountPage from "./ManageAccountPage"; // Import the Manage Account page
 import Introduction from "./Introduction";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
@@ -115,6 +116,15 @@ const App = () => {
                       }
                     />
                     <Route path="/reel" element={<ReelPage />} />
+                    <Route
+                      path="/manage-account"
+                      element={
+                        <ManageAccountPage
+                          user={currentUser}
+                          onProfileImageChange={handleProfileImageChange} // Handle profile image change for Manage Account page
+                        />
+                      }
+                    />
                   </Routes>
                 </>
               ) : (

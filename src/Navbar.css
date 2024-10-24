@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   list-style: none;
-  margin: 0;
+  margin: 4;
   padding: 0;
  
 }
@@ -50,7 +50,7 @@
 }
 
 /* Profile Picture */
-.profile-picture {
+.profile-picture-navbar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -59,15 +59,17 @@
   transition: transform 0.3s ease;
 }
 
-.profile-picture:hover {
+.profile-picture-navbar:hover {
   transform: scale(1.1); /* Slight enlarge on hover */
 }
 
 /* Button Styles */
+.dropdown-arrow-button
 .logout-button,
 .upload-button,
 .profile-button,
-.logo-button {
+.logo-button 
+.dropdown-item{
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -90,7 +92,9 @@
 /* Hover Effect for All Buttons */
 .logout-button:hover,
 .upload-button:hover,
-.logo-button:hover {
+.logo-button:hover,
+.dropdown-arrow-button
+.dropdown-item {
   background-color: rgba(255, 255, 255, 0.1);
   transform: scale(1.1); /* Slight enlarge on hover */
 }
@@ -99,4 +103,48 @@
   background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
   border-radius: 50%; /* Make it round on hover */
   transition: all 0.3s ease; /* Smooth transition for the hover effect */
+}
+
+
+  /* Profile Dropdown Container */
+.profile-dropdown {
+  display: flex;
+  align-items: center; /* Aligns both the image and the arrow vertically */
+}
+
+/* Profile Picture */
+.profile-picture-navbar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #336D72; /* Dark teal */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  margin-right: 8px; /* Add space between the profile picture and the arrow */
+}
+
+.profile-picture-navbar:hover {
+  transform: scale(1.1); /* Slight enlarge on hover */
+}
+
+/* Dropdown Arrow Button */
+.dropdown-arrow-button {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centralize the arrow vertically */
+  padding: 8px;
+  margin-left: 4px; /* Space between the arrow and profile picture */
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size:  0.8rem; 
+  transition: transform 0.3s ease;
+}
+
+/* Hover Effect for Dropdown Arrow */
+.dropdown-arrow-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1); /* Slight enlarge on hover */
 }

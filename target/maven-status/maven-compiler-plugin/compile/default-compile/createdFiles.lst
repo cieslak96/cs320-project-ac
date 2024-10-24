@@ -1,4 +1,7 @@
+org/acme/User.class
 org/acme/UserName.class
 org/acme/GreetingResource.class
 org/acme/FrontendForwardingResource.class
+org/acme/App.class
 org/acme/Person.class
+org/acme/ProfileResource.class
